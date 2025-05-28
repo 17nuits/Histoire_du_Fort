@@ -15,29 +15,95 @@ const customIcon = L.icon({
     popupAnchor: [0, 200],
 })
 
-const contentRade = `<h1>Position stratégique</h1>
-                    <p>Ici, on parle des Ennemis de la République.</p>
-                    <a href="poi2.html?id=carte2">Voir plus >></a>`
+const contentRade = `<div class="fermer">
+                        <a class="close_link" href="index.html">
+                          <img src="./images/fleche_retour.png" alt="Flèche retour">
+                          <p>retour</p>
+                        </a>
+                      </div>
+                      <div class="cartes-container">
+                        <div class="stroke">
+                            <a href="poi2.html?id=carte2"><img src="./images/carte_stroke.png" alt=""></a>
+                        </div>
+                        <div class="img_carte">
+                            <img src="./images/img_carte2.png" alt="">
+                        </div>
+                      </div>`
 
-const contentGlacis_chemins = `<h1>Contrôler sans être vu</h1>
-                                <p>Ici, on cause architecture.</p>
-                                <a href="poi3.html?id=carte3">Voir plus >></a>`
+const contentGlacis_chemins = `<div class="fermer">
+                                <a class="close_link" href="index.html">
+                                  <img src="./images/fleche_retour.png" alt="Flèche retour">
+                                  <p>retour</p>
+                                </a>
+                              </div>
+                              <div class="cartes-container">
+                                <div class="stroke">
+                                    <a href="poi3.html?id=carte3"><img src="./images/carte_stroke.png" alt=""></a>
+                                </div>
+                                <div class="img_carte">
+                                    <img src="./images/img_carte3.png" alt="">
+                                </div>
+                              </div>`
 
-const contentDouves = `<h1>L'ennemi piégé</h1>
-                        <p>L'eau glouglou en gros ils se noyaient ces gros neuils.</p>
-                        <a href="poi4.html?id=carte4">Voir plus >></a>`
+const contentDouves = `<div class="fermer">
+                        <a class="close_link" href="index.html">
+                          <img src="./images/fleche_retour.png" alt="Flèche retour">
+                          <p>retour</p>
+                        </a>
+                      </div>
+                      <div class="cartes-container">
+                        <div class="stroke">
+                            <a href="poi4.html?id=carte4"><img src="./images/carte_stroke.png" alt=""></a>
+                        </div>
+                        <div class="img_carte">
+                            <img src="./images/img_carte4.png" alt="">
+                        </div>
+                      </div>`
 
-const contentSixFours = `<h1>Défense en réseau</h1>
-                        <p>Communication en sémaphores.</p>
-                        <a href="poi5.html?id=carte5">Voir plus >></a>`
+const contentSixFours = `<div class="fermer">
+                        <a class="close_link" href="index.html">
+                          <img src="./images/fleche_retour.png" alt="Flèche retour">
+                          <p>retour</p>
+                        </a>
+                      </div>
+                      <div class="cartes-container">
+                        <div class="stroke">
+                            <a href="poi5.html?id=carte5"><img src="./images/carte_stroke.png" alt=""></a>
+                        </div>
+                        <div class="img_carte">
+                            <img src="./images/img_carte5.png" alt="">
+                        </div>
+                      </div>`
 
-const contentSablettes = `<h1>Fort de mer</h1>
-                        <p>Guette la anse des Sablettes.</p>
-                        <a href="poi6.html?id=carte6">Voir plus >></a>`
+const contentSablettes = `<div class="fermer">
+                        <a class="close_link" href="index.html">
+                          <img src="./images/fleche_retour.png" alt="Flèche retour">
+                          <p>retour</p>
+                        </a>
+                      </div>
+                      <div class="cartes-container">
+                        <div class="stroke">
+                            <a href="poi6.html?id=carte6"><img src="./images/carte_stroke.png" alt=""></a>
+                        </div>
+                        <div class="img_carte">
+                            <img src="./images/img_carte6.png" alt="">
+                        </div>
+                      </div>`
                         
-const contentFin = `<h1>À travers le temps</h1>
-                        <p>Seconde Guerre Mondiale tout ça tout ça.</p>
-                        <a href="poi7.html?id=carte7">Voir plus >></a>`  
+const contentFin = `<div class="fermer">
+                        <a class="close_link" href="index.html">
+                          <img src="./images/fleche_retour.png" alt="Flèche retour">
+                          <p>retour</p>
+                        </a>
+                      </div>
+                      <div class="cartes-container">
+                        <div class="stroke">
+                            <a href="poi7.html?id=carte7"><img src="./images/carte_stroke.png" alt=""></a>
+                        </div>
+                        <div class="img_carte">
+                            <img src="./images/img_carte7.png" alt="">
+                        </div>
+                      </div>`  
 
 const contentDebut = `<div class="fermer">
                         <a class="close_link" href="index.html">
@@ -45,11 +111,13 @@ const contentDebut = `<div class="fermer">
                           <p>retour</p>
                         </a>
                       </div>
-                      <div class="stroke">
-                        <img src="./images/carte_stroke.png" alt="">
-                      </div>
-                      <div class="img_carte">
-                        <a href="poi1.html?id=carte1"><img src="./images/img_carte1.png" alt=""></a>
+                      <div class="cartes-container">
+                        <div class="stroke">
+                            <a href="poi1.html?id=carte1"><img src="./images/carte_stroke.png" alt=""></a>
+                        </div>
+                        <div class="img_carte">
+                            <img src="./images/img_carte1.png" alt="">
+                        </div>
                       </div>` 
 
 function addCenteredMarker(lat, lng, icon, popupContent) {
