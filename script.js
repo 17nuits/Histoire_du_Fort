@@ -63,25 +63,6 @@ Fin.bindPopup(contentFin)
 const Debut = L.marker([43.093891436432344, 5.894060887361602], { icon: customIcon }).addTo(map)
 Debut.bindPopup(contentDebut)
 
-// on peut ajouter un event sur le marqueur
-
-// Rade.on("click", fonctionClicSurPoi)
-
-// function fonctionClicSurPoi(e) {
-//     // on récupère les coordonnées de l'événement
-//     const latlng = e.latlng
-//     // accéder à la latitude et longitude avec latlng.lat et latlng.lng 
-//     console.log(latlng)
-//     // au clic sur LargestContentfulPaint, on va ajouter une description sous la map
-//     const description = `<article>
-//                             <h2>quoicoubeh</h2>
-//                             <p>ça c la description en gros</p>
-//                         </article>`
-//     // ne pas oublier de l'injecter dans le DOM
-//     const map= document.querySelector("#map")
-//     map.insertAdjacentHTML('afterend', description)
-// }
-
 navigator.geolocation.watchPosition(fonctionSucces, fonctionErreur)
 
 function fonctionErreur(error) {

@@ -15,7 +15,7 @@ cardsData.forEach((card) => {
 })
 
 // sélectionner dans la page HTML l'élément qui va contenir l'affichage du compteur 
-document.querySelector("#nb_compteur").textContent = `${counter}/${totalCards}`
+document.querySelector("#nb_compteur p").textContent = `${counter}/${totalCards}`
 
 // pour déverouiller une carte :
   // sur la page qui permet de déverouiller la carte :
@@ -26,8 +26,6 @@ document.querySelector("#nb_compteur").textContent = `${counter}/${totalCards}`
 
 const url = new URL(window.location.href)
 const id = url.searchParams.get("id")
-
-const cardsData = JSON.parse(localStorage.getItem("cards"))
 
 //trouver l'index de la carte à déverouiller grâce à son id
 const index = cardsData.findIndex((card) => card.id === id) // un fichier pour chaque page
