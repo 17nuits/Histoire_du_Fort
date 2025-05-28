@@ -7,11 +7,11 @@ cardsData.forEach((card) => {
   // si la carte est vérouillée : affiche ??? pour titre et le dos de la carte
 
   const left = `<div class="triangle-gauche">
-                  <img src="/images/triangle-gauche.svg" alt="Triangle">
+                  <img src="./images/triangle-gauche.svg" alt="Triangle">
                 </div>`
 
   const right = `<div class="triangle-droite">
-                    <img src="/images/triangle-droite.svg" alt="Triangle">
+                    <img src="./images/triangle-droite.svg" alt="Triangle">
                 </div>`
 
   const templateUnlocked = `<div class="cartes ${isLeft ? 'bloc-gauche' : 'bloc-droite'}">
@@ -21,7 +21,7 @@ cardsData.forEach((card) => {
                             <div class="rond"></div>`
 
   const templateLocked = `<div class="cartes ${isLeft ? 'bloc-gauche' : 'bloc-droite'}">
-                            <img src="/images/cartedos.png" alt="???">
+                            <img src="./images/cartedos.png" alt="???">
                             <h3>???</h3>
                           </div>
                           <div class="rond"></div>`
