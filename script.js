@@ -38,9 +38,18 @@ const contentFin = `<h1>À travers le temps</h1>
                         <p>Seconde Guerre Mondiale tout ça tout ça.</p>
                         <a href="poi7.html?id=carte7">Voir plus >></a>`  
 
-const contentDebut = `<h1>Mise en contexte</h1>
-                    <p>Seconde Guerre Mondiale tout ça tout ça.</p>
-                    <a href="poi1.html?id=carte1">Voir plus >></a>` 
+const contentDebut = `<div class="fermer">
+                        <a class="close_link" href="index.html">
+                          <img src="./images/fleche_retour.png" alt="Flèche retour">
+                          <p>retour</p>
+                        </a>
+                      </div>
+                      <div class="stroke">
+                        <img src="./images/carte_stroke.png" alt="">
+                      </div>
+                      <div class="img_carte">
+                        <a href="poi1.html?id=carte1"><img src="./images/img_carte1.png" alt=""></a>
+                      </div>` 
                 
 const Rade = L.marker([43.094541, 5.894143], { icon: customIcon }).addTo(map)
 Rade.bindPopup(contentRade) // pour ajouter une popup au Rade, on utilise la méthode bindPopup() sur notre marqueur
@@ -97,6 +106,13 @@ function fonctionSucces(position) {
     userMarker.setLatLng([lat, lng]);
   }
 }
+
+const marker = L.marker([lat, lng], { icon }).addTo(map);
+
+marker.on("click", () => {
+  map.setView([lat, lng], 18) // centre la carte sur le marqueur
+  marker.openPopup() // ouvre la popup liée
+})
 
 const cards = [
   {

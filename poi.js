@@ -10,12 +10,12 @@ const cardsData = JSON.parse(localStorage.getItem("cards"))
 cardsData.forEach((card) => {
   totalCards++
   if(!card.isLocked) {
-    counter++
+    compteur++
   }
 })
 
 // sélectionner dans la page HTML l'élément qui va contenir l'affichage du compteur 
-document.querySelector("#nb_compteur p").textContent = `${counter}/${totalCards}`
+document.querySelector("#nb_compteur p").textContent = `${compteur}/${totalCards}`
 
 // pour déverouiller une carte :
   // sur la page qui permet de déverouiller la carte :
