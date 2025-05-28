@@ -12,6 +12,7 @@ const customIcon = L.icon({
     iconUrl: './images/marqueur_before.png',
     iconSize: [32, 41],
     iconAnchor: [16, 45], // point d'attache sur l'image
+    popupAnchor: [0, 200],
 })
 
 const contentRade = `<h1>Position stratégique</h1>
@@ -50,27 +51,45 @@ const contentDebut = `<div class="fermer">
                       <div class="img_carte">
                         <a href="poi1.html?id=carte1"><img src="./images/img_carte1.png" alt=""></a>
                       </div>` 
-                
-const Rade = L.marker([43.094541, 5.894143], { icon: customIcon }).addTo(map)
-Rade.bindPopup(contentRade) // pour ajouter une popup au Rade, on utilise la méthode bindPopup() sur notre marqueur
 
-const Glacis_chemins = L.marker([43.094706, 5.893048], { icon: customIcon }).addTo(map)
-Glacis_chemins.bindPopup(contentGlacis_chemins)
+function addCenteredMarker(lat, lng, icon, popupContent) {
+  const marker = L.marker([lat, lng], { icon }).addTo(map)
+  marker.bindPopup(popupContent)
 
-const douves = L.marker([43.09428786752031, 5.892970139717544], { icon: customIcon }).addTo(map)
-douves.bindPopup(contentDouves)
+  marker.on("click", () => {
+    marker.openPopup()
+  })
+  return marker
+}
 
-const SixFours = L.marker([43.09439533756529, 5.892834939964796], { icon: customIcon }).addTo(map)
-SixFours.bindPopup(contentSixFours)
+const debut = addCenteredMarker(43.093891436432344, 5.894060887361602, customIcon, contentDebut);
+const rade = addCenteredMarker(43.094541, 5.894143, customIcon, contentRade);
+const glacisChemins = addCenteredMarker(43.094706, 5.893048, customIcon, contentGlacis_chemins);
+const douves = addCenteredMarker(43.09428786752031, 5.892970139717544, customIcon, contentDouves);
+const sixFours = addCenteredMarker(43.09439533756529, 5.892834939964796, customIcon, contentSixFours);
+const sablettes = addCenteredMarker(43.09354748975822, 5.8930319617373605, customIcon, contentSablettes);
+const fin = addCenteredMarker(43.09360606207853, 5.893696466445446, customIcon, contentFin);
 
-const Sablettes = L.marker([43.09354748975822, 5.8930319617373605], { icon: customIcon }).addTo(map)
-Sablettes.bindPopup(contentSablettes)
+// const Rade = L.marker([43.094541, 5.894143], { icon: customIcon }).addTo(map)
+// Rade.bindPopup(contentRade)
 
-const Fin = L.marker([43.09360606207853, 5.893696466445446], { icon: customIcon }).addTo(map)
-Fin.bindPopup(contentFin)
+// const Glacis_chemins = L.marker([43.094706, 5.893048], { icon: customIcon }).addTo(map)
+// Glacis_chemins.bindPopup(contentGlacis_chemins)
 
-const Debut = L.marker([43.093891436432344, 5.894060887361602], { icon: customIcon }).addTo(map)
-Debut.bindPopup(contentDebut)
+// const douves = L.marker([43.09428786752031, 5.892970139717544], { icon: customIcon }).addTo(map)
+// douves.bindPopup(contentDouves)
+
+// const SixFours = L.marker([43.09439533756529, 5.892834939964796], { icon: customIcon }).addTo(map)
+// SixFours.bindPopup(contentSixFours)
+
+// const Sablettes = L.marker([43.09354748975822, 5.8930319617373605], { icon: customIcon }).addTo(map)
+// Sablettes.bindPopup(contentSablettes)
+
+// const Fin = L.marker([43.09360606207853, 5.893696466445446], { icon: customIcon }).addTo(map)
+// Fin.bindPopup(contentFin)
+
+// const Debut = L.marker([43.093891436432344, 5.894060887361602], { icon: customIcon }).addTo(map)
+// Debut.bindPopup(contentDebut)
 
 navigator.geolocation.watchPosition(fonctionSucces, fonctionErreur)
 
@@ -106,13 +125,6 @@ function fonctionSucces(position) {
     userMarker.setLatLng([lat, lng]);
   }
 }
-
-const marker = L.marker([lat, lng], { icon }).addTo(map);
-
-marker.on("click", () => {
-  map.setView([lat, lng], 18) // centre la carte sur le marqueur
-  marker.openPopup() // ouvre la popup liée
-})
 
 const cards = [
   {

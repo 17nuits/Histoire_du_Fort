@@ -44,8 +44,8 @@ img.leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive {
 }
 
 div.leaflet-popup-content-wrapper {
-    width: 90vw;
-    height: 80vh;
+    width: 300px;
+    height: 450px;
     border-radius: 25px;
 }
 
@@ -53,6 +53,7 @@ div.leaflet-popup-content {
   width: 100%;
   height: 100%;
   margin: 0;
+  position: relative;
 }
 
 div.leaflet-popup-tip-container > div {
@@ -63,15 +64,30 @@ div.leaflet-pane.leaflet-popup-pane > div > a {
     display: none;
 }
 
+.fermer {
+    position: absolute;
+}
+
 .stroke {
     width: 100%;
     height: 100%;
+    position: absolute;
 }
 
 .stroke img {
     filter: hue-rotate(263deg) saturate(0.4);
     width: 100%;
     height: 100%;
-    display: block;
+    /* display: block; */
     object-fit: contain;
+    z-index: 2;
+}
+
+.img_carte {
+    position: absolute;
+}
+
+.img_carte a img {
+    width: 100%;
+    z-index: 1;
 }

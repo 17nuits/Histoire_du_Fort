@@ -1,6 +1,8 @@
 // ça on le met dans la frise (dans un autre fichier)
 let isLeft = true
 
+const cardsData = JSON.parse(localStorage.getItem("cards"))
+
 cardsData.forEach((card) => {
   //récupérer élément html et l'injecter dans le DOM
   // si carte déverouillée : affiche titre et carte retournée dans le bon sens 
@@ -21,7 +23,7 @@ cardsData.forEach((card) => {
                             <div class="rond"></div>`
 
   const templateLocked = `<div class="cartes ${isLeft ? 'bloc-gauche' : 'bloc-droite'}">
-                            <img src="./images/cartedos.png" alt="???">
+                            <img src="./images/cartemystere.png" alt="???">
                             <h3>???</h3>
                           </div>
                           <div class="rond"></div>`
