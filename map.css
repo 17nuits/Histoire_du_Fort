@@ -1,0 +1,58 @@
+.container {
+    position: relative;
+    height: 100vh;
+}
+
+body {
+    margin: 0;
+}
+
+header {
+    background-color: var(--blanc);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-radius: 0 0 25px 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 10;
+}
+
+#logo img {
+    height: 38px;
+}
+
+.icon_header img {
+    height: 29px;
+}
+
+img.leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive {
+    filter: hue-rotate(267deg) saturate(0.5);
+}
+
+#map { 
+    height: 100vh; 
+    width: 100vw;
+    position: absolute; 
+    filter: hue-rotate(100deg) brightness(1) saturate(2.5) contrast(0.9);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+}
+
+div.leaflet-popup-content-wrapper {
+    width: 90vw;
+    height: 80vh;
+    border-radius: 25px;
+}
+
+div.leaflet-popup-tip-container > div {
+    display: none;
+}
+
+div.leaflet-pane.leaflet-popup-pane > div > a {
+    display: none;
+}
