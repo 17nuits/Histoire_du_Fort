@@ -1,17 +1,28 @@
 const map = L.map('map', {
-  zoomControl: false // pas de boutons zoom
+  zoomControl: false
 }).setView([43.09426508666567, 5.893304735524395], 18)
 
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-    maxZoom: 19,
+  maxZoom: 19,
 }).addTo(map)
 
+// Icône personnalisée
 const customIcon = L.icon({
-    iconUrl: './images/marqueur_before.png',
-    iconSize: [32, 41],
-    iconAnchor: [16, 45], // point d'attache sur l'image
-    popupAnchor: [0, 200],
+  iconUrl: './images/marqueur_before.png',
+  iconSize: [32, 41],
+  iconAnchor: [16, 45],
 })
+
+const userIcon = L.icon({
+  iconUrl: './images/user_marker.png',
+  iconSize: [32, 32],
+  iconAnchor: [16, 45],
+})
+
+// Précharger le son de notification
+const notifSound = new Audio('./videos/notification.mp3');
+// Facultatif : baisse le volume si c'est trop fort
+notifSound.volume = 0.5;
 
 const contentRade = `<div class="fermer">
                         <a class="close_link" href="index.html">
@@ -118,131 +129,107 @@ const contentDebut = `<div class="fermer">
                         </div>
                       </div>` 
 
-function addCenteredMarker(lat, lng, icon, popupContent) {
-  const marker = L.marker([lat, lng], { icon }).addTo(map)
-  marker.bindPopup(popupContent)
+const poisData = [
+  {
+    id: "carte2",
+    coords: [43.094541, 5.894143],
+    content: contentRade,
+  },
+  {
+    id: "carte3",
+    coords: [43.094706, 5.893048],
+    content: contentGlacis_chemins,
+  },
+  {
+    id: "carte4",
+    coords: [43.09428786752031, 5.892970139717544],
+    content: contentDouves,
+  },
+  {
+    id: "carte5",
+    coords: [43.09439533756529, 5.892834939964796],
+    content: contentSixFours,
+  },
+  {
+    id: "carte6",
+    coords: [43.09354748975822, 5.8930319617373605],
+    content: contentSablettes,
+  },
+  {
+    id: "carte7",
+    coords: [43.09360606207853, 5.893696466445446],
+    content: contentFin,
+  },
+  {
+    id: "carte1",
+    coords: [43.093891436432344, 5.894060887361602],
+    content: contentDebut,
+  }
+]
 
-  marker.on("click", () => {
-    marker.openPopup()
-  })
-  return marker
-}
+const markers = poisData.map(poi => {
+  const marker = L.marker(poi.coords, { icon: customIcon }).addTo(map);
+  marker.bindPopup(poi.content);
+  return {
+    id: poi.id,
+    marker,
+    coords: poi.coords,
+    notified: false // on n’a pas encore joué le son pour ce POI
+  }
+})
 
-const debut = addCenteredMarker(43.093891436432344, 5.894060887361602, customIcon, contentDebut)
-const rade = addCenteredMarker(43.094541, 5.894143, customIcon, contentRade)
-const glacisChemins = addCenteredMarker(43.094706, 5.893048, customIcon, contentGlacis_chemins)
-const douves = addCenteredMarker(43.09428786752031, 5.892970139717544, customIcon, contentDouves)
-const sixFours = addCenteredMarker(43.09439533756529, 5.892834939964796, customIcon, contentSixFours)
-const sablettes = addCenteredMarker(43.09354748975822, 5.8930319617373605, customIcon, contentSablettes)
-const fin = addCenteredMarker(43.09360606207853, 5.893696466445446, customIcon, contentFin)
-
-// calculer la distance entre deux points
+// calculer la distance en mètres
 function getDistanceFromLatLonInMeters(lat1, lon1, lat2, lon2) {
   const R = 6371e3;
-  const dLat = (lat2 - lat1) * Math.PI / 180;
-  const dLon = (lon2 - lon1) * Math.PI / 180;
-  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+  const dLat = (lat2 - lat1) * Math.PI / 180
+  const dLon = (lon2 - lon1) * Math.PI / 180
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
     Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-    Math.sin(dLon / 2) * Math.sin(dLon / 2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  return R * c;
+    Math.sin(dLon / 2) * Math.sin(dLon / 2)
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+  return R * c
 }
 
 navigator.geolocation.watchPosition(fonctionSucces, fonctionErreur)
 
 function fonctionErreur(error) {
-    switch(error.code){
-        case error.PERMISSION_DENIED:
-            console.log("L'utilisateur a refusé la demande de géolocalisation.")
-            break; //fermeture : le code sort de la condition
-        case error.POSITION_UNAVAILABLE:
-            console.log("Les informations sur la position sont indisponibles.")
-            break;
-        case error.UNKNOWN_ERROR:
-            console.log("Une erreur inconnue s'est produite.")
-            break;
-    }
+  switch (error.code) {
+    case error.PERMISSION_DENIED:
+      console.log("L'utilisateur a refusé la demande de géolocalisation.")
+      break;
+    case error.POSITION_UNAVAILABLE:
+      console.log("Les informations sur la position sont indisponibles.")
+      break;
+    case error.UNKNOWN_ERROR:
+      console.log("Une erreur inconnue s'est produite.")
+      break;
+  }
 }
-
-const userIcon = L.icon({
-  iconUrl: './images/user_marker.png',
-  iconSize: [32, 32],
-  iconAnchor: [16, 45],
-})
 
 function fonctionSucces(position) {
   const lat = position.coords.latitude
   const lng = position.coords.longitude
-  let userMarker = null
-  if (!userMarker) {
-    userMarker = L.marker([lat, lng], { icon: userIcon }).addTo(map);
+
+  if (!window.userMarker) {
+    window.userMarker = L.marker([lat, lng], { icon: userIcon }).addTo(map)
   } else {
-    userMarker.setLatLng([lat, lng]);
+    window.userMarker.setLatLng([lat, lng])
   }
-}
 
-const cards = [
-  {
-    id: "carte1",
-    isLocked: true,
-    imageURL: "./images/carte1.png",
-    title: "Mise en contexte",
-    pageURL: "poi1.html?id=carte1",
-  },
-  {
-    id: "carte2",
-    isLocked: true,
-    imageURL: "./images/carte2.png",
-    title: "Position stratégique",
-    pageURL: "poi2.html?id=carte2",
-  },
-  {
-    id: "carte3",
-    isLocked: true,
-    imageURL: "./images/carte3.png",
-    title: "Contrôler sans être vu",
-    pageURL: "poi3.html?id=carte3",
-  },
-  {
-    id: "carte4",
-    isLocked: true,
-    imageURL: "./images/carte4.png",
-    title: "L'ennemi piégé",
-    pageURL: "poi4.html?id=carte4",
-  },
-  {
-    id: "carte5",
-    isLocked: true,
-    imageURL: "./images/carte5.png",
-    title: "Défense en réseau",
-    pageURL: "poi5.html?id=carte5",
-  },
-  {
-    id: "carte6",
-    isLocked: true,
-    imageURL: "./images/carte6.png",
-    title: "Fort de mer",
-    pageURL: "poi6.html?id=carte6",
-  },
-  {
-    id: "carte7",
-    isLocked: true,
-    imageURL: "./images/carte7.png",
-    title: "À travers le temps",
-    pageURL: "poi7.html?id=carte7",
-  },
-]
+  const seuil = 10
 
-if(!localStorage.getItem("cards")) {
-  localStorage.setItem("cards", JSON.stringify(cards))
-}
+  markers.forEach(item => {
+    const [latPoi, lngPoi] = item.coords
+    const distance = getDistanceFromLatLonInMeters(lat, lng, latPoi, lngPoi)
 
-const cardsData = JSON.parse(localStorage.getItem("cards"))
-
-const seuil = 25
-  pois.forEach(poi => {
-    const distance = getDistanceFromLatLonInMeters(lat, lng, poi.lat, poi.lng)
-    if (distance < seuil) {
-      poi.marker.openPopup()
+    if (distance < seuil && !item.notified) {
+      item.marker.openPopup()
+      notifSound.currentTime = 0
+      notifSound.play().catch(err => {
+        console.warn("Impossible de jouer le son automatiquement :", err)
+      })
+      item.notified = true
     }
   })
+}
