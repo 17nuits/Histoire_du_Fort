@@ -1,12 +1,10 @@
 const map = L.map('map', {
   zoomControl: false // pas de boutons zoom
-}).setView([43.09426508666567, 5.893304735524395], 18); // [latitude, longitude], zoom de base sur la map
+}).setView([43.09426508666567, 5.893304735524395], 18)
 
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     maxZoom: 19,
-}).addTo(map); //là on a une map en gros
-
-// Rade.bindPopup("Contenu de la popup") //on peut mettre du html dans la popup
+}).addTo(map)
 
 const customIcon = L.icon({
     iconUrl: './images/marqueur_before.png',
@@ -130,34 +128,25 @@ function addCenteredMarker(lat, lng, icon, popupContent) {
   return marker
 }
 
-const debut = addCenteredMarker(43.093891436432344, 5.894060887361602, customIcon, contentDebut);
-const rade = addCenteredMarker(43.094541, 5.894143, customIcon, contentRade);
-const glacisChemins = addCenteredMarker(43.094706, 5.893048, customIcon, contentGlacis_chemins);
-const douves = addCenteredMarker(43.09428786752031, 5.892970139717544, customIcon, contentDouves);
-const sixFours = addCenteredMarker(43.09439533756529, 5.892834939964796, customIcon, contentSixFours);
-const sablettes = addCenteredMarker(43.09354748975822, 5.8930319617373605, customIcon, contentSablettes);
-const fin = addCenteredMarker(43.09360606207853, 5.893696466445446, customIcon, contentFin);
+const debut = addCenteredMarker(43.093891436432344, 5.894060887361602, customIcon, contentDebut)
+const rade = addCenteredMarker(43.094541, 5.894143, customIcon, contentRade)
+const glacisChemins = addCenteredMarker(43.094706, 5.893048, customIcon, contentGlacis_chemins)
+const douves = addCenteredMarker(43.09428786752031, 5.892970139717544, customIcon, contentDouves)
+const sixFours = addCenteredMarker(43.09439533756529, 5.892834939964796, customIcon, contentSixFours)
+const sablettes = addCenteredMarker(43.09354748975822, 5.8930319617373605, customIcon, contentSablettes)
+const fin = addCenteredMarker(43.09360606207853, 5.893696466445446, customIcon, contentFin)
 
-// const Rade = L.marker([43.094541, 5.894143], { icon: customIcon }).addTo(map)
-// Rade.bindPopup(contentRade)
-
-// const Glacis_chemins = L.marker([43.094706, 5.893048], { icon: customIcon }).addTo(map)
-// Glacis_chemins.bindPopup(contentGlacis_chemins)
-
-// const douves = L.marker([43.09428786752031, 5.892970139717544], { icon: customIcon }).addTo(map)
-// douves.bindPopup(contentDouves)
-
-// const SixFours = L.marker([43.09439533756529, 5.892834939964796], { icon: customIcon }).addTo(map)
-// SixFours.bindPopup(contentSixFours)
-
-// const Sablettes = L.marker([43.09354748975822, 5.8930319617373605], { icon: customIcon }).addTo(map)
-// Sablettes.bindPopup(contentSablettes)
-
-// const Fin = L.marker([43.09360606207853, 5.893696466445446], { icon: customIcon }).addTo(map)
-// Fin.bindPopup(contentFin)
-
-// const Debut = L.marker([43.093891436432344, 5.894060887361602], { icon: customIcon }).addTo(map)
-// Debut.bindPopup(contentDebut)
+// calculer la distance entre deux points
+function getDistanceFromLatLonInMeters(lat1, lon1, lat2, lon2) {
+  const R = 6371e3;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+}
 
 navigator.geolocation.watchPosition(fonctionSucces, fonctionErreur)
 
@@ -182,12 +171,10 @@ const userIcon = L.icon({
 })
 
 function fonctionSucces(position) {
-    // console.log(position.coords)
-    const lat = position.coords.latitude
-    const lng = position.coords.longitude
-    // map.setView([lat, lng], 18)
-    let userMarker = null
-    if (!userMarker) {
+  const lat = position.coords.latitude
+  const lng = position.coords.longitude
+  let userMarker = null
+  if (!userMarker) {
     userMarker = L.marker([lat, lng], { icon: userIcon }).addTo(map);
   } else {
     userMarker.setLatLng([lat, lng]);
@@ -196,8 +183,8 @@ function fonctionSucces(position) {
 
 const cards = [
   {
-    id: "carte1", // doit être unique
-    isLocked: true, // (ici le poi est déjà ajouté)
+    id: "carte1",
+    isLocked: true,
     imageURL: "./images/carte1.png",
     title: "Mise en contexte",
     pageURL: "poi1.html?id=carte1",
@@ -246,10 +233,16 @@ const cards = [
   },
 ]
 
-// stocker cards dans le localStorage s'il n'existe pas déjà
 if(!localStorage.getItem("cards")) {
   localStorage.setItem("cards", JSON.stringify(cards))
 }
 
-//récupérer les données du localStorage
 const cardsData = JSON.parse(localStorage.getItem("cards"))
+
+const seuil = 25
+  pois.forEach(poi => {
+    const distance = getDistanceFromLatLonInMeters(lat, lng, poi.lat, poi.lng)
+    if (distance < seuil) {
+      poi.marker.openPopup()
+    }
+  })

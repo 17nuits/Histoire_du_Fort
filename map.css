@@ -136,3 +136,17 @@ div.leaflet-pane.leaflet-popup-pane > div > a {
 .stroke {
     z-index: 2;
 }
+
+#loader {
+    position: fixed;
+    inset: 0;
+    background-color: var(--violet);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+}
+
+#videoLoader {
+    width: 100px;
+}
