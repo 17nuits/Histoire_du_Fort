@@ -276,3 +276,13 @@ video {
     color: var(--violet);
     padding: 0 40px;
 }
+
+#lien_to_map {
+    text-decoration: none;
+    color: var(--violet);
+}
+
+#lien_to_map:active {
+    text-decoration: none;
+    color: var(--violet_clicked);
+}

@@ -291,3 +291,13 @@ p {
     background-color: var(--violet_clicked);
     color: var(--blanc_clicked);
 }
+
+#lien_to_map {
+    text-decoration: none;
+    color: var(--violet);
+}
+
+#lien_to_map:active {
+    text-decoration: none;
+    color: var(--violet_clicked);
+}
