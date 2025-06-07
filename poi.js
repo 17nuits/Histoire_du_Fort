@@ -1,20 +1,27 @@
-let compteur = 0
-let totalCards = 0
-const cardsData = JSON.parse(localStorage.getItem("cards"))
-cardsData.forEach((card) => {
-  totalCards++
-  if(!card.isLocked) {
-    compteur++
+(function(){
+  const urlParams = new URL(window.location.href).searchParams
+  const id = urlParams.get("id")
+  if (!id) {
+    return
   }
-})
 
-document.querySelector("#nb_compteur p").textContent = `${compteur}/${totalCards}`
+  const cardsData = JSON.parse(localStorage.getItem("cards")) || []
 
-const url = new URL(window.location.href)
-const id = url.searchParams.get("id")
+  const index = cardsData.findIndex(card => card.id === id)
+  if (index !== -1 && cardsData[index].isLocked) {
+    cardsData[index].isLocked = false
+    localStorage.setItem("cards", JSON.stringify(cardsData))
+  }
 
-const index = cardsData.findIndex((card) => card.id === id) // un fichier pour chaque page
+  let compteur = 0
+  const totalCards = cardsData.length
+  cardsData.forEach(card => {
+    if (!card.isLocked) compteur++
+  })
 
-cardsData[index].isLocked = false
-
-localStorage.setItem("cards", JSON.stringify(cardsData))
+  const compteurEl = document.querySelector("#nb_compteur p")
+  if (compteurEl) {
+    compteurEl.textContent = `${compteur}/${totalCards}`
+  }
+  
+})()

@@ -19,9 +19,7 @@ const userIcon = L.icon({
   iconAnchor: [16, 45],
 })
 
-// Précharger le son de notification
 const notifSound = new Audio('./videos/notification.mp3');
-// Facultatif : baisse le volume si c'est trop fort
 notifSound.volume = 0.5;
 
 const contentRade = `<div class="fermer">
