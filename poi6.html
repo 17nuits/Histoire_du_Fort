@@ -56,7 +56,7 @@
                     </div>
                     <div id="bloc_photos" class="flou">
                         <div class="photos">
-                            <img id="sablettes" src="./images/sablettes.jpg" alt="Anse des Sablettes.">
+                            <img id="sablettes" class="zoomable" src="./images/sablettes.jpg" alt="Anse des Sablettes.">
                         </div>
                     </div>
                     <div id="espace_chouette">
@@ -77,8 +77,13 @@
             </section>
         </div>
     </div>
+    <div id="lightbox-overlay" class="hidden">
+        <img id="lightbox-img" src="" alt="Plein écran">
+        <span id="lightbox-close">&times;</span>
+    </div>
     <script src="videos.js"></script>
     <script src="chouette.js" defer></script>
     <script src="poi.js"></script>
+    <script src="lightbox.js"></script>
 </body>
 </html>

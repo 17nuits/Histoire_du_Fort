@@ -52,7 +52,7 @@
                 </div>
                 <div id="contenu">
                     <div id="motion" class="flou">
-                        <img id="motion4" src="./images/motion_poi4.gif" alt="Motion design de l'architecture du fort.">
+                        <img id="motion4" class="zoomable" src="./images/motion_poi4.gif" alt="Motion design de l'architecture du fort.">
                     </div>
                     <div id="espace_chouette">
                         <div id="chouette">
@@ -72,8 +72,13 @@
             </section>
         </div>
     </div>
+    <div id="lightbox-overlay" class="hidden">
+        <img id="lightbox-img" src="" alt="Plein écran">
+        <span id="lightbox-close">&times;</span>
+    </div>
     <script src="videos.js"></script>
     <script src="chouette.js" defer></script>
     <script src="poi.js"></script>
+    <script src="lightbox.js"></script>
 </body>
 </html>

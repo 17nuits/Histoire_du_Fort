@@ -286,3 +286,34 @@ video {
     text-decoration: none;
     color: var(--violet_clicked);
 }
+
+#lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+#lightbox-overlay.hidden {
+  display: none;
+}
+
+#lightbox-img {
+  max-width: 90%;
+  max-height: 90%;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  border-radius: 8px;
+}
+
+#lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2rem;
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+}

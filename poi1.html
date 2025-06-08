@@ -54,7 +54,7 @@
                         <p>Serez-vous capable de compléter la collection et de reconstituer toute l'histoire du fort ?</p>
                     </div>
                     <div id="motion">
-                        <img id="motion1" src="./images/motion_poi1.gif" alt="Tuto concept.">
+                        <img id="motion1" class="zoomable" src="./images/motion_poi1.gif" alt="Tuto concept.">
                     </div>
                     <div class="textes">
                         <p>En 1793, Toulon est livrée aux Anglais et leurs alliés par les royalistes. Napoléon Bonaparte, alors jeune capitaine d'artillerie de l'armée républicaine chargée de reprendre le grand port, propose de reprendre la colline du Caire. Le 17 décembre, les Républicains triomphent. En 1811, l'Empereur ordonne la construction d'un fort à cet emplacement stratégique. Il deviendra plus tard le Fort Napoléon.</p>
@@ -70,7 +70,12 @@
             </section>
         </div>
     </div>
+    <div id="lightbox-overlay" class="hidden">
+        <img id="lightbox-img" src="" alt="Plein écran">
+        <span id="lightbox-close">&times;</span>
+    </div>
     <script src="videos.js"></script>
     <script src="poi.js"></script>
+    <script src="lightbox.js"></script>
 </body>
 </html>

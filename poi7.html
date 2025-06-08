@@ -45,30 +45,30 @@
                     </div>
                     <div id="bloc_photos">
                         <div class="photos">
-                            <img src="./images/hist1.jpg" alt="Le Fort Napoléon en 1793.">
+                            <img src="./images/hist1.jpg" class="zoomable" alt="Le Fort Napoléon en 1793.">
                         </div>
                         <div class="legendes">
                             <p>Fort Napoléon – Tamaris sur mer – 1793</p>
                         </div>
                         <div class="photos">
-                            <img src="./images/hist2.png" alt="Cérémonie en hommage à Napoléon Bonaparte.">
+                            <img src="./images/hist2.png" class="zoomable" alt="Cérémonie en hommage à Napoléon Bonaparte.">
                         </div>
                         <div class="legendes">
                             <p>Cérémonie en hommage à Napoléon Bonaparte</p>
                         </div>
                         <div id="double">
                             <div class="photos2">
-                                <img src="./images/hist3.jpg" alt="Fort à l'abandon dans les années 70/80.">
+                                <img src="./images/hist3.jpg" class="zoomable" alt="Fort à l'abandon dans les années 70/80.">
                             </div>
                             <div class="photos2">
-                                <img src="./images/hist4.jpg" alt="Fort à l'abandon dans les années 70/80, vue en plongée.">
+                                <img src="./images/hist4.jpg" class="zoomable" alt="Fort à l'abandon dans les années 70/80, vue en plongée.">
                             </div>
                         </div>
                         <div class="legendes">
                             <p>Fort à l'abandon – Années 70/80 – Avant réhabilitation</p>
                         </div>
                         <div class="photos">
-                            <img src="./images/hist5.jpg" alt="Travaux de rénovation et réhabilitation du fort par la ville de La Seyne-sur-Mer dans les années 80/90.">
+                            <img src="./images/hist5.jpg" class="zoomable" alt="Travaux de rénovation et réhabilitation du fort par la ville de La Seyne-sur-Mer dans les années 80/90.">
                         </div>
                         <div class="legendes">
                             <p>Travaux de rénovation et réhabilitation du fort par la ville de La Seyne-sur-Mer – Années 80/90</p>
@@ -83,7 +83,12 @@
             </section>
         </div>
     </div>
+    <div id="lightbox-overlay" class="hidden">
+        <img id="lightbox-img" src="" alt="Plein écran">
+        <span id="lightbox-close">&times;</span>
+    </div>
     <script src="frise.js"></script>
     <script src="poi.js"></script>
+    <script src="lightbox.js"></script>
 </body>
 </html>
