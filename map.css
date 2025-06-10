@@ -150,3 +150,40 @@ div.leaflet-pane.leaflet-popup-pane > div > a {
 #videoLoader {
     width: 120px;
 }
+
+#first_visit_overlay {
+  display: none;
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 10000; /* au-dessus de la map */
+  justify-content: center;
+  align-items: center;
+}
+
+#first_visit_overlay.visible {
+  display: flex;
+}
+
+#first_visit {
+  background: var(--blanc);
+  padding: 20px 14px;
+  border-radius: 12px;
+  max-width: 75%;
+  text-align: center;
+  font-family: 'Josefin Sans';
+  color: var(--noir);
+}
+
+#first_visit_close {
+  padding: 6px 15px 8px;
+  border: none;
+  background: var(--rose);
+  color: var(--blanc);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#first_visit button {
+      font-family: 'Antonio';
+}
